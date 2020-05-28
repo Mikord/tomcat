@@ -829,6 +829,9 @@ public class NamingContext implements Context {
         NamingEntry entry = bindings.get(name.get(0));
 
         if (entry == null) {
+            if (!name.get(0).equals("comp") || !name.get(1).equals("env")) {
+                return lookup(new CompositeName("comp/env/" + name), resolveLinks);
+            }
             throw new NameNotFoundException
                 (sm.getString("namingContext.nameNotBound", name, name.get(0)));
         }
